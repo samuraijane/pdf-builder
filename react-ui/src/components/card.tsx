@@ -6,7 +6,7 @@ import {
   Font,
   StyleSheet
 } from '@react-pdf/renderer';
-import data from './data.json';
+import data from './card.json';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,15 +23,15 @@ const styles = StyleSheet.create({
   },
   uiOnly: {
     backgroundColor: "aliceblue",
-    height: "216px",
+    height: "216px", // 3 inches at 72 ppi
     margin: "10px",
-    width: "360px"
+    width: "360px" // 5 inches at 72 ppi
   }
 });
 
 export const Card = () => {
   const cards = data.map((card, index) => (
-    <li key={index} style={{...styles.card, ...styles.uiOnly}}>{card.filename}</li>
+    <li key={index} style={{...styles.card, ...styles.uiOnly}}>{card.title}</li>
   ));
 
   return <ul style={styles.container}>{cards}</ul>;
@@ -42,7 +42,7 @@ export const CardPDF = () => {
     return (
       <Page key={index} size={['300', '156']} style={styles.container}>
         <View style={styles.card}>
-          <Text>{card.filename}</Text>
+          <Text>{card.title}</Text>
         </View>
       </Page>
     );
